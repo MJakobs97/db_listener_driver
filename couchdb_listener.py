@@ -51,18 +51,45 @@ while id not in db:
  for id in db:
   print(id)
 
-sleep(10)
-try:
- for changes in db.changes(feed="continuous", heartbeat=50000):
-  print(changes)
-  #doc = db[changes[id]]
-  #print("Data is: "+ str(doc['data'][0])+"\n")
-  msg = ""
+#sleep(10)
+
+for doc_id in db:
+ id = doc_id
+
+
+
+for changes in db.changes(feed="continuous",heartbeat=1000):
+ try:
+  #print(changes["id"])
+  if changes["id"] in db:
+   doc = db[changes["id"]]
+   print("Data is: "+ str(doc['data'][0])+"\n")
+   msg = "BAT |DSK |GPS |Rec \n"
+   
+   bat=str(doc['data'][0]['battery'])+"%| "
+   
+   dsk=str(int(int(doc['data'][0]['disk'])/1024/1024))+"GB| "
+   
+   tmp = doc['data'][0]['gps']
+   #tgps = True if tmp == 1 else False
+   tgps = ""
+   if tmp == 0:
+    tgps = False
+   elif tmp == 1:
+    tgps = True
+   gps=("y" if tgps else "n")+"| "
+   
+   tmp = doc['data'][0]['aenc']
+   aenc=("y" if tmp else "n")+"| "
+   
+   msg+=bat+dsk+gps+aenc
+   with canvas(device) as draw:
+    draw.text((0,10),msg,fill="white")
 
   #sleep(5)
 
-except Exception as ex:
- print("Error: \n", str(ex))
+ except Exception as ex:
+  print("Error: \n", str(ex))
 
 
 
