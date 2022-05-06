@@ -5,8 +5,6 @@ from luma.core.render import canvas
 from luma.oled.device import sh1106
 from time import sleep
 
-
-
 serial = i2c(port=1, address=0x3c)
 
 device = sh1106(serial)
@@ -42,7 +40,7 @@ with canvas(device) as draw:
  msg = "DB connection successful!"
  draw.text((0,32),msg, fill="white")
 
-sleep(5)
+#sleep(5)
 
 id = ""
 
@@ -56,11 +54,12 @@ while id not in db:
 sleep(10)
 try:
  for changes in db.changes(feed="continuous", heartbeat=50000):
-  doc = db[changes[id]]
-  print("Data is: "+ str(doc['data'][0])+"\n")
+  print(changes)
+  #doc = db[changes[id]]
+  #print("Data is: "+ str(doc['data'][0])+"\n")
   msg = ""
 
-  sleep(5)
+  #sleep(5)
 
 except Exception as ex:
  print("Error: \n", str(ex))
