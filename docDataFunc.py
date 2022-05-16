@@ -5,6 +5,8 @@ def construct_msg(doc, nrClients):
  for i in range(nrClients):
   print(i)
   id =str(doc['data'][i]['address'])+"|"
+  id_tmp = id.split(":")
+  id = id_tmp[-2]+":"+id_tmp[-1]
   bat=str(doc['data'][i]['battery'])+"%|"
   dsk=str(int(int(doc['data'][i]['disk'])/1024/1024))+"GB|"
   tmp = doc['data'][i]['gps']
