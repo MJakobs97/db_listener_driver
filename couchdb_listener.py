@@ -8,14 +8,6 @@ from time import sleep
 serial = i2c(port=1, address=0x3c)
 
 device = sh1106(serial)
-#iter = 0
-#while iter < 3:
-# with canvas(device) as draw:
-#  draw.rectangle(device.bounding_box, outline="white",fill="black")
-#  msg = "Hello World " + str(iter)
-#  draw.text((30,40),msg, fill="white")
-#  iter +=1
-#  sleep(10)
 
 couch = couchdb.Server()
 database_name = "gopro_stats"
@@ -40,8 +32,6 @@ with canvas(device) as draw:
  msg = "DB connection successful!"
  draw.text((0,32),msg, fill="white")
 
-#sleep(5)
-
 id = ""
 
 while id not in db:
@@ -50,8 +40,6 @@ while id not in db:
  sleep(5)
  for id in db:
   print(id)
-
-#sleep(10)
 
 for doc_id in db:
  id = doc_id
@@ -86,7 +74,7 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
    with canvas(device) as draw:
     draw.text((0,10),msg,fill="white")
 
-  #sleep(5)
+
 
  except Exception as ex:
   print("Error: \n", str(ex))
