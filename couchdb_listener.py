@@ -67,12 +67,14 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
     msg = construct_msg(doc, nrClients)
    elif error:
     print("Go crazy!")
+    msg = "is bad"
 
    with canvas(device) as draw:
     draw.text((0,0),msg,fill="white")
 
  except Exception as ex:
   print("Error: \n", str(ex))
+  print(ex.__cause__)
 
 
 
