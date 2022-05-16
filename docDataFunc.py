@@ -33,7 +33,7 @@ def analyze(doc, nrClients):
   rec=doc['data'][i]['aenc']
 
   #currently ignore rec
-  if (bat<15 | dsk<10 | gps == 0):
+  if (int(bat)<15 | int(dsk)<10 | gps =="0"):
     error = True
     errorID.append(i)
  return error, errorID
