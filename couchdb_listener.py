@@ -44,35 +44,49 @@ while id not in db:
 for doc_id in db:
  id = doc_id
 
-
+"""
+Wertebereiche:
+BAT 10%
+DSK 5GB
+GPS Y/N
+REC Y/N
+"""
 
 for changes in db.changes(feed="continuous",heartbeat=1000):
  try:
   #print(changes["id"])
+  
+  #data acquisition:
   if changes["id"] in db:
    doc = db[changes["id"]]
-   print("Data is: "+ str(doc['data'][0])+"\n")
-   msg = "BAT |DSK |GPS |Rec \n"
+   nrClients = len(doc['data'])
+
+   #print("Data is: "+ str(doc['data'][0])+"\n")
+   msg = "ID|BAT|DSK|GPS|REC\n"
+
+   for i in range(nrClients):
+     print(i)
+     id =str(doc['data'][i]['address'])+"|"
+     bat=str(doc['data'][i]['battery'])+"%|"
+     dsk=str(int(int(doc['data'][i]['disk'])/1024/1024))+"GB|"
+     tmp = doc['data'][i]['gps']
+     #tgps = True if tmp == 1 else False
+     tgps = ""
+     if tmp == 0:
+      tgps = False
+     elif tmp == 1:
+      tgps = True
+     gps=("y" if tgps else "n")+"|"
+       
+     tmp = doc['data'][i]['aenc']
+     rec=("y" if tmp else "n")+"|"
    
-   bat=str(doc['data'][0]['battery'])+"%| "
-   
-   dsk=str(int(int(doc['data'][0]['disk'])/1024/1024))+"GB| "
-   
-   tmp = doc['data'][0]['gps']
-   #tgps = True if tmp == 1 else False
-   tgps = ""
-   if tmp == 0:
-    tgps = False
-   elif tmp == 1:
-    tgps = True
-   gps=("y" if tgps else "n")+"| "
-   
-   tmp = doc['data'][0]['aenc']
-   aenc=("y" if tmp else "n")+"| "
-   
-   msg+=bat+dsk+gps+aenc
+     msg+=id+bat+dsk+gps+rec+"\n"
+
+
+
    with canvas(device) as draw:
-    draw.text((0,10),msg,fill="white")
+    draw.text((0,0),msg,fill="white")
 
 
 
