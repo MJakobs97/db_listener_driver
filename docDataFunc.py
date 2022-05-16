@@ -9,7 +9,7 @@ def construct_msg(doc, nrClients):
   id = id_tmp[-2]+":"+id_tmp[-1]
   bat=str(doc['data'][i]['battery'])+"%|"
   dsk=str(int(int(doc['data'][i]['disk'])/1024/1024))+"G|"
-  tmp = doc['data'][i]['gps']
+  tmp = int(doc['data'][i]['gps'])
   #tgps = True if tmp == 1 else False
   tgps = ""
   if tmp == 0:
