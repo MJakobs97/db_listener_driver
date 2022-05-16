@@ -74,7 +74,7 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
 
  except Exception as ex:
   print("Error: \n", str(ex))
-  print(ex.__cause__)
+  print(ex)
 
 
 
