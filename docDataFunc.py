@@ -3,7 +3,7 @@ def construct_msg(doc, nrClients):
  msg = "ID|BAT|DSK|GPS|REC\n"
 
  for i in range(nrClients):
-  print(i)
+  print("Client Nr: %i \n", i)
   id =str(doc['data'][i]['address'])+"|"
   id_tmp = id.split(":")
   id = id_tmp[-2]+":"+id_tmp[-1]
@@ -13,13 +13,16 @@ def construct_msg(doc, nrClients):
   #tgps = True if tmp == 1 else False
   tgps = ""
   if tmp == 0:
-   tgps = False
+   tgps = "N"
   elif tmp == 1:
-   tgps = True
-  gps=("y" if tgps else "n")+"|"       
+   tgps = "Y"
+  #gps=("y" if tgps else "n")+"|"       
+  gps = tgps
   tmp = doc['data'][i]['aenc']
-  rec=("y" if tmp else "n")+"|"   
+  #rec=("y" if tmp else "n")+"|"   
+  rec=tmp
   msg+=id+bat+dsk+gps+rec+"\n"
+  print(msg)
 
  return msg
 
