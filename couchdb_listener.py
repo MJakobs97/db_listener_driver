@@ -88,13 +88,24 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
    with canvas(device) as draw:
     draw.text((0,0),msg,fill="white")
 
-
-
  except Exception as ex:
   print("Error: \n", str(ex))
 
+def analyze(doc, nrClients):
+ error=False
+ errorID=[]
+ 
+ for i in range(nrClients):
+  id =str(doc['data'][i]['address'])
+  bat=str(doc['data'][i]['battery'])
+  dsk=str(int(int(doc['data'][i]['disk'])/1024/1024))
+  gps=doc['data'][i]['gps']
+  rec=doc['data'][i]['aenc']
 
-
-
+  #currently ignore rec
+  if (bat<15 | dsk<10 | gps == 0):
+    error = True
+    errorID.append(i)
+ return error, errorID
 
 
