@@ -62,20 +62,16 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
    doc = db[changes["id"]]
    nrClients = len(doc['data'])
    error, errorID = analyze(doc, nrClients)
-
-   if not error:
-    msg = construct_msg(doc, nrClients)
-   elif error:
-    print("Go crazy!")
-    msg = "is bad"
-    with canvas(device) as draw:
+   with canvas(device) as draw:
+    if not error:
+     msg = construct_msg(doc, nrClients)
+     draw.text((0,0),msg,fill="white")
+    elif error:
+     print("Go crazy!")
+     msg = "is bad"
      draw.rectangle(device.bounding_box, outline="white", fill="white")
      draw.text((32,16),msg,fill="black")
-    sleep(5)
-
-   with canvas(device) as draw:
-    #draw.rectangle(device.bounding_box, outline="white", fill="white")
-    draw.text((0,0),msg,fill="white")
+     
 
  except Exception as ex:
   print("Error: \n", str(ex))
