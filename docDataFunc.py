@@ -55,9 +55,9 @@ def error_blink():
   #exchange print statements with GPIO hi/low for LED
   elapsed = 0
   while elapsed < 4:
-   sleep(0.5)
+   sleep(0.4)
    print("LED ON!")
-   sleep(0.5)
+   sleep(0.2)
    print("LED OFF!")
   #Do Stuff with led
    elapsed +=1
@@ -67,9 +67,9 @@ def error_beep():
   elapsed = 0
   while elapsed < 4:
    print("BUZZER ON!")
-   sleep(0.5)
+   sleep(0.4)
    print("BUZZER OFF!")
-   sleep(0.25)
+   sleep(0.2)
    elapsed +=1
    
 def multiwarn():
