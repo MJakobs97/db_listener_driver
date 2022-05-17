@@ -71,6 +71,7 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
     with canvas(device) as draw:
      draw.rectangle(device.bounding_box, outline="white", fill="white")
      draw.text((32,16),msg,fill="black")
+     sleep(5)
 
    with canvas(device) as draw:
     #draw.rectangle(device.bounding_box, outline="white", fill="white")
