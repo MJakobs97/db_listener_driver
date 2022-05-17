@@ -1,3 +1,6 @@
+from time import sleep
+from multiprocessing import Process
+
 def construct_msg(doc, nrClients):
  #print("Data is: "+ str(doc['data'][0])+"\n")
  msg = "ID|BAT|DSK|GPS|REC\n"
@@ -48,7 +51,37 @@ def analyze(doc, nrClients):
     errorMSG += "\n"
  return error, errorID, errorMSG
 
- def error_blink():
-   #Do Stuff with led
-   return True
+def error_blink():
+  #exchange print statements with GPIO hi/low for LED
+  elapsed = 0
+  while elapsed < 4:
+   sleep(0.5)
+   print("LED ON!")
+   sleep(0.5)
+   print("LED OFF!")
+  #Do Stuff with led
+   elapsed +=1
+
+def error_beep():
+  #exchange print statements with GPIO hi/low for BUZZER
+  elapsed = 0
+  while elapsed < 4:
+   print("BUZZER ON!")
+   sleep(0.5)
+   print("BUZZER OFF!")
+   sleep(0.25)
+   elapsed +=1
+   
+def multiwarn():
+ processes = []
+ p1 = Process(target=error_blink)
+ p1.start()
+ processes.append(p1)
+ 
+ p2 = Process(target=error_beep)
+ p2.start()
+ processes.append(p2)
+
+ for p in processes:
+   p.join()
 
