@@ -62,6 +62,7 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
    doc = db[changes["id"]]
    nrClients = len(doc['data'])
    error, errorID, errorMSG = analyze(doc, nrClients)
+   
    with canvas(device) as draw:
     if not error:
      msg = construct_msg(doc, nrClients)
