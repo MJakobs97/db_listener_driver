@@ -38,13 +38,13 @@ def analyze(doc, nrClients):
   if (int(bat)<bat_thrshld or int(dsk)<dsk_thrshld or gps !="1"):
     error = True
     errorID.append(i)
-    errorMSG += "C%d" %(i)
+    errorMSG += "C%d " %(i)
     if int(bat)<bat_thrshld:
-     errorMSG +="lowbat "
+     errorMSG +="lBat "
     if int(dsk)<dsk_thrshld:
-     errorMSG +="lowdsk "
+     errorMSG +="lDsk "
     if gps !="1":
-     errorMSG += "nogps "
+     errorMSG += "nGps "
     errorMSG += "\n"
  return error, errorID, errorMSG
 
