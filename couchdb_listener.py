@@ -66,10 +66,12 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
    with canvas(device) as draw:
     if not error:
      msg = construct_msg(doc, nrClients)
+     draw.clear()
      draw.text((0,0),msg,fill="white")
     elif error:
      print("Go crazy!")
      msg = "Error:\n"+errorMSG
+     draw.clear()
      draw.rectangle(device.bounding_box, outline="white", fill="white")
      draw.text((0,0),msg,fill="black")
      
