@@ -2,7 +2,6 @@ from time import sleep
 from multiprocessing import Process
 
 def construct_msg(doc, nrClients):
- #print("Data is: "+ str(doc['data'][0])+"\n")
  msg = "ID|BAT|DSK|GPS|REC\n"
 
  for i in range(nrClients):
@@ -13,7 +12,6 @@ def construct_msg(doc, nrClients):
   bat=str(doc['data'][i]['battery'])+"%|"
   dsk=str(int(int(doc['data'][i]['disk'])/1024/1024))+"G|"
   tgps = int(doc['data'][i]['gps'])
-  #gps = Y if tgps == 1 else N
   gps=("Y" if tgps else "N")+"|"       
   aenc = int(doc['data'][i]['aenc'])
   rec=("Y" if aenc else "N")+"|"   
@@ -36,8 +34,6 @@ def analyze(doc, nrClients):
   gps=doc['data'][i]['gps']
   rec=doc['data'][i]['aenc']
 
-  #currently ignore rec
-  
   if (int(bat)<bat_thrshld or int(dsk)<dsk_thrshld or gps !="1" or rec !="1"):
     error = True
     errorID.append(i)
@@ -61,7 +57,6 @@ def error_blink():
    print("LED ON!")
    sleep(0.2)
    print("LED OFF!")
-  #Do Stuff with led
    elapsed +=1
 
 def error_beep():
@@ -86,4 +81,3 @@ def multiwarn():
 
  for p in processes:
    p.join()
-
