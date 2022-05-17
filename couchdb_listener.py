@@ -74,7 +74,7 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
 
    with canvas(device) as draw:
     #draw.rectangle(device.bounding_box, outline="white", fill="white")
-    draw.text((32,16),msg,fill="white")
+    draw.text((0,0),msg,fill="white")
 
  except Exception as ex:
   print("Error: \n", str(ex))
