@@ -22,6 +22,7 @@ def construct_msg(doc, nrClients):
 def analyze(doc, nrClients):
  error=False
  errorID=[]
+ errorMSG=""
  bat_thrshld = 15
  dsk_thrshld = 10
  
@@ -33,6 +34,7 @@ def analyze(doc, nrClients):
   rec=doc['data'][i]['aenc']
 
   #currently ignore rec
+  
   if (int(bat)<bat_thrshld or int(dsk)<dsk_thrshld or gps !="1"):
     error = True
     errorID.append(i)
