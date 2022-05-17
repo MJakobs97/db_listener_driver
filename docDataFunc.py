@@ -22,6 +22,8 @@ def construct_msg(doc, nrClients):
 def analyze(doc, nrClients):
  error=False
  errorID=[]
+ bat_thrshld = 15
+ dsk_thrshld = 10
  
  for i in range(nrClients):
   id =str(doc['data'][i]['address'])
@@ -31,8 +33,20 @@ def analyze(doc, nrClients):
   rec=doc['data'][i]['aenc']
 
   #currently ignore rec
-  if (int(bat)<15 or int(dsk)<10 or gps !="1"):
+  if (int(bat)<bat_thrshld or int(dsk)<dsk_thrshld or gps !="1"):
     error = True
     errorID.append(i)
- return error, errorID
+    errorMSG = "C%"%(i)
+    if int(bat)<bat_thrshld:
+     errorMSG += "%s"%("lowbat ")
+    if int(dsk)<dsk_thrshld:
+     errorMSG += "%s"%("lowdsk ")
+    if gps !="1":
+     errorMSG += "%s"%("nogps ")
+    errorMSG += "\n"
+ return error, errorID, errorMSG
+
+ def error_blink():
+   #Do Stuff with led
+   return True
 
