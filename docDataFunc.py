@@ -31,7 +31,7 @@ def analyze(doc, nrClients):
   rec=doc['data'][i]['aenc']
 
   #currently ignore rec
-  if (int(bat)<15 or int(dsk)<10 or gps =="0"):
+  if (int(bat)<15 or int(dsk)<10 or gps !="1"):
     error = True
     errorID.append(i)
  return error, errorID
