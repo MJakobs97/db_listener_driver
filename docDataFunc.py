@@ -38,7 +38,7 @@ def analyze(doc, nrClients):
 
   #currently ignore rec
   
-  if (int(bat)<bat_thrshld or int(dsk)<dsk_thrshld or gps !="1"):
+  if (int(bat)<bat_thrshld or int(dsk)<dsk_thrshld or gps !="1" or rec !="1"):
     error = True
     errorID.append(i)
     errorMSG += "C%d " %(i)
@@ -48,6 +48,8 @@ def analyze(doc, nrClients):
      errorMSG +="DISK "
     if gps !="1":
      errorMSG += "GPS "
+    if rec !="1":
+     errorMSG += "REC"
     errorMSG += "\n"
  return error, errorID, errorMSG
 
