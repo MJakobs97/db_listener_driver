@@ -1,5 +1,6 @@
 from time import sleep
 from multiprocessing import Process
+from gpiozero import LED
 
 def construct_msg(doc, nrClients):
  msg = "ID|BAT|DSK|GPS|REC\n"
@@ -51,13 +52,14 @@ def analyze(doc, nrClients):
 
 def error_blink():
   #exchange print statements with GPIO hi/low for LED
-  elapsed = 0
-  while elapsed < 4:
-   sleep(0.4)
-   print("LED ON!")
-   sleep(0.2)
-   print("LED OFF!")
-   elapsed +=1
+  try:    
+   led = LED(26)
+   led.blink(on_time=0.05, off_time=0.1)
+   sleep(5)
+   led.off()
+  except Exception as ex:
+   print("möp")
+   led.off()
 
 def error_beep():
   #exchange print statements with GPIO hi/low for BUZZER
