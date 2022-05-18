@@ -6,7 +6,7 @@ from luma.oled.device import sh1106
 from time import sleep
 from docDataFunc import analyze, construct_msg, multiwarn, error_beep, error_blink
 
-serial = i2c(port=1, address=0x3c)
+serial = i2c(port=3, address=0x3c)
 
 device = sh1106(serial)
 
