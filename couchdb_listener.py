@@ -70,8 +70,8 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
      draw.text((0,0),msg,fill="white")
     elif error:
      msg = "Error:\n"+errorMSG
-     #draw.rectangle(device.bounding_box, outline="white", fill="white")
      draw.text((0,0),msg,fill="white")
+     #draw.rectangle(device.bounding_box, outline="white", fill="white")     
      multiwarn()
      
 
