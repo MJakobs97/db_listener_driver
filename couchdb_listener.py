@@ -4,7 +4,7 @@ from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import sh1106
 from time import sleep
-from docDataFunc import analyze, construct_msg, multiwarn, error_beep, error_blink
+from docDataFunc import analyze, construct_msg, multiwarn, error_beep, error_blink, threadwarn
 
 serial = i2c(port=3, address=0x3c)
 
@@ -72,7 +72,8 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
      msg = "Error:\n"+errorMSG
      draw.text((0,0),msg,fill="white")
      #draw.rectangle(device.bounding_box, outline="white", fill="white")     
-     multiwarn()
+     #multiwarn()
+     threadwarn()
      
 
  except Exception as ex:
