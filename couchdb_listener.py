@@ -69,11 +69,10 @@ for changes in db.changes(feed="continuous",heartbeat=1000):
      msg = construct_msg(doc, nrClients)
      draw.text((0,0),msg,fill="white")
     elif error:
-     print("Go crazy!")
-     multiwarn()
      msg = "Error:\n"+errorMSG
      #draw.rectangle(device.bounding_box, outline="white", fill="white")
      draw.text((0,0),msg,fill="white")
+     multiwarn()
      
 
  except Exception as ex:
