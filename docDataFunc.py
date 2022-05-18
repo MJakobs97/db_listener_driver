@@ -1,5 +1,6 @@
 from time import sleep
 from multiprocessing import Process
+import threading
 from gpiozero import LED
 
 def construct_msg(doc, nrClients):
@@ -83,3 +84,12 @@ def multiwarn():
 
  for p in processes:
    p.join()
+
+def threadwarn():
+ thread_blink = threading.Thread(target=error_blink)
+ thread_blink.daemon=True
+ thread_blink.start()
+
+ thread_beep = threading.Thread(target=error_beep)
+ thread_beep.daemon=True
+ thread_beep.start()
