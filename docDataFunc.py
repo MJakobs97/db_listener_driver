@@ -55,8 +55,8 @@ def error_blink():
   #exchange print statements with GPIO hi/low for LED
   try:    
    led = LED(26)
-   led.blink(on_time=0.05, off_time=0.8)
-   sleep(5)
+   led.blink(on_time=0.05, off_time=0.15)
+   sleep(7.5)
    led.off()
   except Exception as ex:
    print("möp")
