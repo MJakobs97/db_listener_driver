@@ -1,7 +1,14 @@
 from time import sleep
 from multiprocessing import Process
 import threading
+
+from sklearn.covariance import ledoit_wolf
+import tblib
 from gpiozero import LED, Buzzer, TonalBuzzer
+
+led=""
+tb=""
+
 
 def construct_msg(doc, nrClients):
  msg = "ID|BAT|DSK|GPS|REC\n"
@@ -51,25 +58,35 @@ def analyze(doc, nrClients):
     errorMSG += "\n"
  return error, errorID, errorMSG
 
+def init_gpio():
+ try:
+   global led
+   led = LED(26)
+   global tb
+   tb = TonalBuzzer(16)
+ except Exception as ex:
+  print("Exception in init_gpio(): \n", str(ex))
+
+
 def error_blink():
   #exchange print statements with GPIO hi/low for LED
-  try:    
-   led = LED(26)
+  try: 
+   global led   
    led.blink(on_time=0.05, off_time=0.15)
    sleep(7.5)
    led.off()
-   del led
+  
   except Exception as ex:
    print("Exception: Blink!\n", str(ex))
 
 def error_beep():
   #exchange print statements with GPIO hi/low for BUZZER
   try:
-   TB = TonalBuzzer(16)
-   TB.play("A4")
+   global tb
+   tb.play("A4")
    sleep(7.5)
-   TB.stop()
-   del TB
+   tb.stop()
+  
   except Exception as ex:   
    print("Exception: Beep!\n", str(ex))
   
