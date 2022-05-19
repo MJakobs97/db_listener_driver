@@ -4,11 +4,13 @@ from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import sh1106
 from time import sleep
-from docDataFunc import analyze, construct_msg, multiwarn, error_beep, error_blink, threadwarn
+from docDataFunc import analyze, construct_msg, multiwarn, error_beep, error_blink, threadwarn, init_gpio
 
 serial = i2c(port=3, address=0x3c)
 
 device = sh1106(serial)
+
+init_gpio()
 
 couch = couchdb.Server()
 database_name = "gopro_stats"
