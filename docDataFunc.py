@@ -1,7 +1,7 @@
 from time import sleep
 from multiprocessing import Process
 import threading
-from gpiozero import LED
+from gpiozero import LED, Buzzer, TonalBuzzer
 
 def construct_msg(doc, nrClients):
  msg = "ID|BAT|DSK|GPS|REC\n"
@@ -59,18 +59,19 @@ def error_blink():
    sleep(7.5)
    led.off()
   except Exception as ex:
-   print("möp")
+   print("Exception: Blink!\n", str(ex))
    led.off()
 
 def error_beep():
   #exchange print statements with GPIO hi/low for BUZZER
-  elapsed = 0
-  while elapsed < 4:
-   print("BUZZER ON!")
-   sleep(0.4)
-   print("BUZZER OFF!")
-   sleep(0.2)
-   elapsed +=1
+  try:
+   TB = TonalBuzzer(16)
+   TB.play("A4")
+   sleep(7.5)
+   TB.stop()
+  except Exception as ex:   
+   print("Exception: Beep!\n", str(ex))
+  
    
 def multiwarn():
  processes = []
