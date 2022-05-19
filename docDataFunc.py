@@ -60,7 +60,6 @@ def error_blink():
    led.off()
   except Exception as ex:
    print("Exception: Blink!\n", str(ex))
-   led.off()
 
 def error_beep():
   #exchange print statements with GPIO hi/low for BUZZER
