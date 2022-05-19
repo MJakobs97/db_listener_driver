@@ -61,7 +61,6 @@ def error_blink():
    del led
   except Exception as ex:
    print("Exception: Blink!\n", str(ex))
-   del led
 
 def error_beep():
   #exchange print statements with GPIO hi/low for BUZZER
@@ -73,7 +72,6 @@ def error_beep():
    del TB
   except Exception as ex:   
    print("Exception: Beep!\n", str(ex))
-   del TB
   
    
 def multiwarn():
