@@ -1,9 +1,6 @@
 from time import sleep
 from multiprocessing import Process
 import threading
-
-from sklearn.covariance import ledoit_wolf
-import tblib
 from gpiozero import LED, Buzzer, TonalBuzzer
 
 led=""
