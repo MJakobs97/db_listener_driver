@@ -34,9 +34,9 @@ def analyze(doc, nrClients):
   bat=str(doc['data'][i]['battery'])
   dsk=str(int(int(doc['data'][i]['disk'])/1024/1024))
   gps=doc['data'][i]['gps']
-  rec=doc['data'][i]['aenc']
+  #rec=doc['data'][i]['aenc']
 
-  if (int(bat)<bat_thrshld or int(dsk)<dsk_thrshld or gps !="1" or rec !="1"):
+  if (int(bat)<bat_thrshld or int(dsk)<dsk_thrshld or gps !="1"):
     error = True
     errorID.append(i)
     errorMSG += "C%d " %(i)
@@ -46,8 +46,8 @@ def analyze(doc, nrClients):
      errorMSG +="DISK "
     if gps !="1":
      errorMSG += "GPS "
-    if rec !="1":
-     errorMSG += "REC"
+    #if rec !="1":
+     #errorMSG += "REC"
     errorMSG += "\n"
  return error, errorID, errorMSG
 
