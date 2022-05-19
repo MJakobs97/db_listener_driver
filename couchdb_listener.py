@@ -55,7 +55,7 @@ GPS Y/N
 REC Y/N
 """
 
-for changes in db.changes(feed="continuous",heartbeat=1000):
+for changes in db.changes(feed="continuous",heartbeat=600000):
  try:
   #print(changes["id"])
   
