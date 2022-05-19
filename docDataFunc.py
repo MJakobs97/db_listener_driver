@@ -19,8 +19,9 @@ def construct_msg(doc, nrClients):
   dsk=str(int(int(doc['data'][i]['disk'])/1024/1024))+"G|"
   tgps = int(doc['data'][i]['gps'])
   gps=("Y" if tgps else "N")+"|"       
-  aenc = int(doc['data'][i]['aenc'])
-  rec=("Y" if aenc else "N")+"|"   
+  #aenc = int(doc['data'][i]['aenc'])
+  #rec=("Y" if aenc else "N")+"|"   
+  rec="_"
   msg+=id+bat+dsk+gps+rec+"\n"
   print(msg)
 
