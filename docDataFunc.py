@@ -68,7 +68,8 @@ def init_gpio():
 def error_blink():
   #exchange print statements with GPIO hi/low for LED
   try: 
-   global led   
+   global led 
+   led.off()  
    led.blink(on_time=0.05, off_time=0.15)
    sleep(7.5)
    led.off()
@@ -80,6 +81,7 @@ def error_beep():
   #exchange print statements with GPIO hi/low for BUZZER
   try:
    global tb
+   tb.stop()
    tb.play("A4")
    sleep(7.5)
    tb.stop()
