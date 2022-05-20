@@ -62,6 +62,15 @@ def init_gpio():
    led = LED(26)
    global tb
    tb = TonalBuzzer(16)
+
+   notes = ["A4", "C5", "D5", "E5", "F5", "E5", "D5", "B4", "G4"]
+   times = [0.25, 0.5, 0.25, 0.375, 0.125, 0.25, 0.5, 0.25, 0.375]
+
+   for i in range(len(notes)):
+    tb.play(notes[i])
+    sleep(times[i])
+   tb.stop()   
+
  except Exception as ex:
   print("Exception in init_gpio(): \n", str(ex))
 
@@ -84,8 +93,11 @@ def error_beep():
   try:
    global tb
    tb.stop()
-   tb.play("A4")
-   sleep(7.5)
+   for i in range(3):
+    tb.play("A5")
+    sleep(0.125)
+    tb.stop()
+    sleep(0.125)
    tb.stop()
   
   except Exception as ex:   
