@@ -92,7 +92,7 @@ for changes in db.changes(feed="continuous",heartbeat=600000):
         if errorEntries[c]['errors'][e]['errorID'] in errorMSG:
           print("Error known")
           #Is ignored == false?
-          if errorEntries[c]['errors'][e]['ignored'] == False
+          if errorEntries[c]['errors'][e]['ignored'] == False:
            #Warn!
            threadwarn()
 
