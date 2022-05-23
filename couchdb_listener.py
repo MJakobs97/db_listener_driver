@@ -71,7 +71,7 @@ for changes in db.changes(feed="continuous",heartbeat=600000):
   if changes["id"] in db:
    doc = db[changes["id"]]
    nrClients = len(doc['data'])
-   error, errorID, errorMSG = analyze(doc, nrClients)
+   error, errorID, errorMSG, clientID = analyze(doc, nrClients)
 
    device.clear()
    with canvas(device) as draw:
@@ -79,11 +79,25 @@ for changes in db.changes(feed="continuous",heartbeat=600000):
      msg = construct_msg(doc, nrClients)
      draw.text((0,0),msg,fill="white")
     elif error:
-     msg = "Error:\n"+errorMSG
-     draw.text((0,0),msg,fill="white")
+     #msg = "Error:\n"+errorMSG
+     #draw.text((0,0),msg,fill="white")
      #draw.rectangle(device.bounding_box, outline="white", fill="white")     
      #multiwarn()
-     threadwarn()
+     #threadwarn()
+     for c in len(errorEntries):
+      if ('client', clientID) in errorEntries[c].items():
+       print("Client already known to be erroneous.")
+       for e in len(errorEntries[c]['errors']):
+        #Is this particular error already known?
+        if errorEntries[c]['errors'][e]['errorID'] in errorMSG:
+          print("Error known")
+          #Is ignored == false?
+          if errorEntries[c]['errors'][e]['ignored'] == False
+           #Warn!
+           threadwarn()
+
+
+
      
 
  except Exception as ex:
