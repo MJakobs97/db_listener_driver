@@ -6,22 +6,29 @@ from luma.oled.device import sh1106
 from time import sleep
 from docDataFunc import analyze, construct_msg, multiwarn, error_beep, error_blink, threadwarn, init_gpio
 
+#Initialize sh1106 OLED as i2c device on bus 3 (custom)
 serial = i2c(port=3, address=0x3c)
-
 device = sh1106(serial)
 
+#Initialize connected gpiozero devices
 init_gpio()
 
+#Create empty list for future error management
+errorEntries = []
+
+#Create server object to connect to
 couch = couchdb.Server()
 database_name = "gopro_stats"
 
+#Check if database exists on local couchDB server
 while database_name not in couch:
  with canvas(device) as draw:
   msg = "DB document not initialized!\n Please wait ..."
   draw.text((15,32),msg, fill="white")
 
-db=""
 
+#Try to connect to database
+db=""
 try:
  db = couch[database_name]
 except Exception as ex:
@@ -35,8 +42,8 @@ with canvas(device) as draw:
  msg = "DB connection successful!"
  draw.text((0,32),msg, fill="white")
 
+#Get document id from db
 id = ""
-
 while id not in db:
  with canvas(device) as draw:
   draw.text((0,32),"Currently no suitable\ndata in db", fill="white")
@@ -55,6 +62,7 @@ GPS Y/N
 REC Y/N
 """
 
+#Enter loop to listen to continuous changesfeed of couchDB document(s)
 for changes in db.changes(feed="continuous",heartbeat=600000):
  try:
   #print(changes["id"])
