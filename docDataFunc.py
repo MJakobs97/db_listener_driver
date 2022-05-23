@@ -54,7 +54,8 @@ def analyze(doc, nrClients):
     #if rec !="1":
      #errorMSG += "REC"
     errorMSG += "\n"
- return error, errorID, errorMSG
+    clientID = id
+ return error, errorID, errorMSG, clientID
 
 def init_gpio():
  try:
