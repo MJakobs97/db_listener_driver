@@ -43,6 +43,7 @@ def analyze(doc, nrClients):
 
   # Hacky fixes
   # 
+  
   bat=str(50)
   gps="1"
 
