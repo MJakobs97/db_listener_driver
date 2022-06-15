@@ -41,6 +41,11 @@ def analyze(doc, nrClients):
   gps=doc['data'][i]['gps']
   #rec=doc['data'][i]['aenc']
 
+  # Hacky fixes
+  # 
+  bat=str(50)
+  gps="1"
+
   if (int(bat)<bat_thrshld or int(dsk)<dsk_thrshld or gps !="1"):
     error = True
     errorID.append(i)
